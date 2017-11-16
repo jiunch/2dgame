@@ -38,6 +38,8 @@ class Nomal_enemy:
 
         self.x =clamp(0,self.x,800)
 
+        pass
+
     def draw(self):
         self.image.clip_draw(self.total_frame * 100 , self.state *100 , 100, 100 , self.x , self.y)
 
