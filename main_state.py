@@ -1,56 +1,39 @@
-import random
-import json
-import os
+import game_framework
+import select_state
+import start_state
 
 from pico2d import *
 
-import game_framework
-import title_state
-
 name = "MainState"
 
-boy = None
-grass = None
-font = None
+from Nomal_enemy import Nomal_enemy
+from Background import Background
 
+nomal_enemy = None
+background = None
 
-class Background:
-    def __init__(self):
-        self.image = load_image('bakcground.png')
+def create_world():
+    global nomal_enemy,background
+    nomal_enemy = Nomal_enemy()
+    backfround = Background()
 
-    def draw(self):
-        self.image.draw(400, 30)
+    pass
 
+def destroy_world():
+    global nomal_enemy,background
 
-class Nomal_enemy:
-    def __init__(self):
-        self.x, self.y = 0, 90
-        self.frame = 0
-        self.image = load_image('Nomal_enemy.png')
-        self.dir = 1
-
-    def update(self):
-        self.frame = (self.frame + 1) % 4
-        self.x += self.dir
-        if self.x >= 800:
-            self.dir = -1
-        elif self.x <= 0:
-            self.dir = 1
-
-    def draw(self):
-        self.image.clip_draw(self.frame * 100, 0, 100, 100, self.x, self.y)
+    del(nomal_enemy)
+    del(background)
 
 
 def enter():
-    global boy, grass
-    nomal_enemy = Nomal_enemy()
-    background = Background()
+    open_canvas(1300,700)
 
+    create_world()
 
 def exit():
-    global nomal_enemy, background
-    del(nomal_enemy)
-    del(background)
+    destroy_world()
+    close_canvas()
 
 def pause():
     pass
@@ -58,27 +41,28 @@ def pause():
 def resume():
     pass
 
-
-def handle_events():
+def handel_events(frame_time):
     events = get_events()
-    global TF
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.change_state(title_state)
-        elif event.type == SDL_KEYDOWN and event.key == SDLK_p:
-            game_framework.push_state(pause_state)
+        else:
+            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
+                game_framework.quit()
+            else:
+                Nomal_enemy.handle_event(event)
 
 
-def update():
-        boy.update()
+def update(frame_time):
+    nomal_enemy.update(frame_time)
 
-def draw():
+    pass
+
+
+def draw(frame_time):
     clear_canvas()
-    draw_main_scene()
-    update_canvas()
-
-def draw_main_scene():
     background.draw()
     nomal_enemy.draw()
+
+    update_canvas()
+    pass
