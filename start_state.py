@@ -7,6 +7,7 @@ name = "StartState"
 
 image = None
 
+
 def enter():
     global image
     open_canvas(1300,700)

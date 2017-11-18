@@ -6,7 +6,6 @@ from pico2d import *
 
 name = "PauseState"
 image = None
-logo_time = 0.0
 count=0
 
 def enter():
