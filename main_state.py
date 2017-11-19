@@ -32,6 +32,7 @@ class Bowman:
 
     def update(self):
         self.frame = (self.frame + 1) % 4
+        pass
 
     def draw(self):
         self.image.clip_draw(self.frame * 120,0, 120, 110, self.x, self.y)
