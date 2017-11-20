@@ -37,7 +37,7 @@ class Nomal_enemy:
         self.total_frames += Nomal_enemy.FRAMES_PER_ACTION * Nomal_enemy.ACTION_PER_TIME * frame_time
         self.frame = int(self.total_frames) % 4
         self.x += (self.dir * distance)
-        self.x = clamp(0, self.x, 800)
+        self.x = clamp(300, self.x, 1300)
 
     def draw(self):
         self.image.clip_draw(self.frame * 100, self.state * 100, 100, 100, self.x, self.y)
