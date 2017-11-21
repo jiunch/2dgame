@@ -11,5 +11,8 @@ class Background:
         self.image.draw(400, 350)
 
 
+    pass
+
+
 
 
