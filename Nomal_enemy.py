@@ -19,14 +19,14 @@ class Nomal_enemy:
     LEFT_RUN, ATTACK , DIE = 0, 1, 2
 
     def __init__(self):
-        self.x, self.y = 0, 90
+        self.x, self.y = 1250, (100 * random.randint(2,5))
         self.frame = 0
         self.life_time = 0.0
         self.total_frames = 0.0
-        self.dir = 0
+        self.dir = -1
         self.state = self.LEFT_RUN
         if Nomal_enemy.image == None:
-            Nomal_enemy.image = load_image('nomal_enemy.png')
+            Nomal_enemy.image = load_image('Nomal_enemy.png')
 
     def update(self, frame_time):
         def clamp(minimum, x, maximum):
@@ -37,13 +37,23 @@ class Nomal_enemy:
         self.total_frames += Nomal_enemy.FRAMES_PER_ACTION * Nomal_enemy.ACTION_PER_TIME * frame_time
         self.frame = int(self.total_frames) % 4
         self.x += (self.dir * distance)
-        self.x = clamp(300, self.x, 1300)
+        self.x = clamp(350, self.x, 1300)
+
 
     def draw(self):
-        self.image.clip_draw(self.frame * 100, self.state * 100, 100, 100, self.x, self.y)
+        self.image.clip_draw(self.frame * 110, self.state * 100, 110, 100, self.x, self.y)
+
+    def boomdraw(self):
+        self.image.clip_draw(self.frame * 110+440, self.state * 100, 110, 100, self.x, self.y)
 
     def handle_event(self, event):
-        self.state = self.LEFT_RUN
+        pass
+
+    def get_bb(self):
+        return self.x - 55, self.y - 50, self.x + 55, self.y + 50
+
+    def delt(self):
+        self.x = 1250
 
 
 

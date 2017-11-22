@@ -1,16 +1,14 @@
 import game_framework
-import start_state
 import main_state
 
 from pico2d import *
 
-name = "PauseState"
+name = "VictoryState"
 image = None
-count=0
 
 def enter():
     global image
-    image = load_image('number.png')
+    image = load_image('victory.png')
 
 def exit():
     global image
