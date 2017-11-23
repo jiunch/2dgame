@@ -5,7 +5,7 @@ from pico2d import *
 class Nomal_enemy:
 
     PIXEL_PER_METER = (10.0 / 0.5)           # 10 pixel 50 cm
-    RUN_SPEED_KMPH = 18.0                    # Km / Hour
+    RUN_SPEED_KMPH = 5.0                    # Km / Hour
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -53,7 +53,12 @@ class Nomal_enemy:
         return self.x - 55, self.y - 50, self.x + 55, self.y + 50
 
     def delt(self):
-        self.x = 1250
+        self.x, self.y = 1250, (100 * random.randint(2, 5))
+        self.frame = 0
+        self.life_time = 0.0
+        self.total_frames = 0.0
+
+
 
 
 

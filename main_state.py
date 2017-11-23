@@ -100,8 +100,6 @@ def update(frame_time):
             arrow.delt()
             nomal_enemy.delt()
             vic +=1
-            if vic == 10:
-                game_framework.change_state(victory_state)
     if collide(arrow, background):
         arrow.delt()
 

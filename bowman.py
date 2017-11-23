@@ -1,6 +1,5 @@
 from pico2d import *
 
-
 class Bowman:
 
     TIME_PER_ACTION = 0.5
