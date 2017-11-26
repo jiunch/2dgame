@@ -5,6 +5,7 @@ argo=0
 gotr=0
 where1 = 350
 where2 = 350
+
 class Arrow:
 
     PIXEL_PER_METER = (10.0 / 0.5)  # 10 pixel 30 cm
