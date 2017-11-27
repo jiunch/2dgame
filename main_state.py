@@ -1,68 +1,64 @@
-import game_framework
-import select_state
-import start_state
-
 from pico2d import *
 
-name = "MainState"
+import game_framework
 
-from Nomal_enemy import Nomal_enemy
-from Background import Background
-from zoom import Zoom
 from bowman import Bowman
+from nomal_enemy import Nomal_enemy
 from arrow import Arrow
+from background import Background
+from zoom import Zoom
+
+name = "Main_state"
 
 nomal_enemy = None
-background = None
-zoom = None
 bowman = None
 arrow = None
-total = None
-arto= None
+background = None
+zoom = None
 
-count=0
-vic=0
-level =0
+arrownum=0
+
 def create_world():
-    global level
-    global nomal_enemy,background,zoom,bowman,arrow,total,arto
-    arrow = Arrow()
+    global bowman,nomal_enemy,arrow,background,zoom
     bowman = Bowman()
-    background = Background()
-    zoom=Zoom()
+    arrow = [Arrow() for i in range(5)]
     nomal_enemy = [Nomal_enemy() for i in range (3)]
-    level=select_state.countreturn()
-
-    arto=arrow
-    total=nomal_enemy
+    background = Background()
+    zoom = Zoom()
     pass
 
+
 def destroy_world():
-    global nomal_enemy,background,zoom,bowman,arrow
-    del(arrow)
+    global bowman,nomal_enemy,arrow,background,zoom
+
     del(bowman)
-    del(zoom)
     del(nomal_enemy)
+    del(arrow)
     del(background)
+    del(zoom)
+
 
 
 def enter():
-    open_canvas(1300,700)
     game_framework.reset_time()
     create_world()
+
 
 def exit():
     destroy_world()
     close_canvas()
 
+
 def pause():
     pass
+
 
 def resume():
     pass
 
+
 def handle_events(frame_time):
-    global arto
+    global arrownum
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -70,9 +66,14 @@ def handle_events(frame_time):
         else:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
                 game_framework.quit()
+            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+                if(arrownum<5):
+                    arrownum += 1
             else:
                 bowman.handle_event(event)
-                arrow.handle_event(event)
+                for i in range(arrownum):
+                    arrow[i].handle_event(event)
+
 
 def collide(a,b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -86,36 +87,31 @@ def collide(a,b):
     return True
 
 def update(frame_time):
-    global vic
-    for nomal_enemy in total:
-        nomal_enemy.update(frame_time)
-
-    zoom.update(frame_time)
     bowman.update(frame_time)
+    for i in range(arrownum):
+        arrow[i].update(frame_time)
+    for i in range(3):
+        nomal_enemy[i].update(frame_time)
 
-    arrow.update(frame_time)
 
-    for nomal_enemy in total:
-        if collide(arrow, nomal_enemy):
-            arrow.delt()
-            nomal_enemy.delt()
-            vic +=1
-    if collide(arrow, background):
-        arrow.delt()
+    pass
 
 
 
 def draw(frame_time):
-    hide_cursor()
     clear_canvas()
     background.draw()
-
-    for nomal_enemy in total:
-        nomal_enemy.draw()
     bowman.draw()
-    arrow.draw()
-    zoom.draw()
+    for i in range(arrownum):
+        arrow[i] .draw()
+    for i in range(3):
+        nomal_enemy[i].draw()
     pass
 
     update_canvas()
+
+
+
+
+
 

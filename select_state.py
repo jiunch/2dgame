@@ -46,15 +46,6 @@ def handle_events(frame_time):
 
     pass
 
-def countreturn():
-    global count
-    return count
-
-def countnum():
-    global count
-
-    return count
-
 def pause(): pass
 
 def resume(): pass

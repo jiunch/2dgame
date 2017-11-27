@@ -11,7 +11,7 @@ press = None
 
 def enter():
     global image,press
-    open_canvas(1300,700)
+    open_canvas(1300,700,sync=True)
     image = load_image('start_map.png')
     press = load_image('press.png')
 

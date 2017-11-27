@@ -1,10 +1,14 @@
 from pico2d import *
 
+from bowman import Bowman
+
 count =0
 argo=0
 gotr=0
 where1 = 350
 where2 = 350
+
+bowman = None
 
 class Arrow:
 
@@ -20,10 +24,11 @@ class Arrow:
 
     def __init__(self):
         global where1
-        self.x, self.y = 70, where1
+        bowman = Bowman()
+        self.x, self.y = 70, 350
         self.frame=0
         self.life_time = 0.0
-        self.dir = 0
+        self.dir = 1
         self.total_frames = 0.0
         self.image = load_image('arrow.png')
 
@@ -37,25 +42,16 @@ class Arrow:
 
     def draw(self):
         global count
-        if count != 0:
-            self.image.draw(self.x, self.y)
+
+        self.image.draw(self.x, self.y)
 
     def handle_event(self, event):
-        global count,gotr,where1,where2
-        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_w):
-            if where1 <650 :
-                where1+=50
-                where2 += 50
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_s):
-            if where1 > 50:
-                where1 -= 50
-                where2 -= 50
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-            count=1
-            gotr=1
+        global count
+        bowman=Bowman()
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
+            count =1
             self.x=70
-            self.dir =3
-            self.y=where2
+            self.y=bowman.yreturn()
 
     def get_bb(self):
         return self.x-35 , self.y-15 , self.x+35, self.y+15
