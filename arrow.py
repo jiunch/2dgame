@@ -38,7 +38,8 @@ class Arrow:
         self.total_frames += Arrow.FRAMES_PER_ACTION * Arrow.ACTION_PER_TIME * frame_time
         self.x += (self.dir * distance)
 
-
+     def arrowy(self,bowarrowy):
+        self.y = bowarrowy
 
     def draw(self):
         global count
