@@ -21,7 +21,7 @@ class Arrow:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     FRAMES_PER_ACTION = 4
-
+    
     def __init__(self):
         global where1
         bowman = Bowman()
@@ -41,6 +41,8 @@ class Arrow:
      def arrowy(self,bowarrowy):
         self.y = bowarrowy
 
+        pass
+    
     def draw(self):
         global count
 
