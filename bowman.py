@@ -23,6 +23,7 @@ class Bowman:
         self.dir=0
         self.state = self.STAND
         self.image = load_image('bowman.png')
+        pass
 
     def update(self,frame_time):
 
