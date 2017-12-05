@@ -41,7 +41,7 @@ class Arrow:
      def arrowy(self,bowarrowy):
         self.y = bowarrowy
 
-        pass
+        
     
     def draw(self):
         global count
