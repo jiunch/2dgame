@@ -58,5 +58,3 @@ class Bowman:
                 self.state = self.STAND
                 self.dir = 0
 
-    def bowmany(self,bowarrowy):
-        self.y = bowarrowy

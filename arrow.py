@@ -21,40 +21,42 @@ class Arrow:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     FRAMES_PER_ACTION = 4
-    
+
+    STOP , SHOT = 0,1
+
     def __init__(self):
         global where1
-        bowman = Bowman()
-        self.x, self.y = 70, 350
+        self.state = self.STOP
+        self.x, self.y = 70, 0
         self.frame=0
         self.life_time = 0.0
         self.dir = 1
         self.total_frames = 0.0
         self.image = load_image('arrow.png')
 
+    def startdot(self,bowman):
+        self.bowman=bowman
+        self.y=self.bowman.y
+
     def update(self,frame_time):
         self.life_time += frame_time
         distance = Arrow.RUN_SPEED_PPS * frame_time
         self.total_frames += Arrow.FRAMES_PER_ACTION * Arrow.ACTION_PER_TIME * frame_time
         self.x += (self.dir * distance)
+        if self.state == self.STOP:
+            self.y = self.bowman.y
 
-     def arrowy(self,bowarrowy):
-        self.y = bowarrowy
-
-        
-    
     def draw(self):
         global count
-
         self.image.draw(self.x, self.y)
 
     def handle_event(self, event):
         global count
-        bowman=Bowman()
         if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
             count =1
             self.x=70
-            self.y=bowman.yreturn()
+            self.state = self.SHOT
+
 
     def get_bb(self):
         return self.x-35 , self.y-15 , self.x+35, self.y+15

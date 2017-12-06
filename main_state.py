@@ -25,8 +25,11 @@ def create_world():
     nomal_enemy = [Nomal_enemy() for i in range (3)]
     background = Background()
     zoom = Zoom()
-    pass
 
+    for i in range(5):
+        arrow[i].startdot(bowman)
+
+    pass
 
 def destroy_world():
     global bowman,nomal_enemy,arrow,background,zoom
@@ -69,6 +72,8 @@ def handle_events(frame_time):
             elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 if(arrownum<5):
                     arrownum += 1
+                    if arrownum==5 :
+                        arrownum=1
             else:
                 bowman.handle_event(event)
                 for i in range(arrownum):
