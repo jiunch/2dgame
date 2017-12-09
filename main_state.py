@@ -1,6 +1,8 @@
 from pico2d import *
 
 import game_framework
+import endstate
+import start_state
 
 from bowman import Bowman
 from nomal_enemy import Nomal_enemy
@@ -17,18 +19,17 @@ background = None
 zoom = None
 
 arrownum=0
+Life = 1
 
 def create_world():
     global bowman,nomal_enemy,arrow,background,zoom
     bowman = Bowman()
-    arrow = [Arrow() for i in range(5)]
+    arrow = Arrow()
     nomal_enemy = [Nomal_enemy() for i in range (3)]
     background = Background()
     zoom = Zoom()
 
-    for i in range(5):
-        arrow[i].startdot(bowman)
-
+    arrow.startdot(bowman)
     pass
 
 def destroy_world():
@@ -66,18 +67,13 @@ def handle_events(frame_time):
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
+        elif Life ==0:
+            game_framework.change_state(endstate)
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
+            game_framework.change_state(start_state)
         else:
-            if (event.type, event.key) == (SDL_KEYDOWN, SDLK_ESCAPE):
-                game_framework.quit()
-            elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
-                if(arrownum<5):
-                    arrownum += 1
-                    if arrownum==5 :
-                        arrownum=1
-            else:
-                bowman.handle_event(event)
-                for i in range(arrownum):
-                    arrow[i].handle_event(event)
+            bowman.handle_event(event)
+            arrow.handle_event(event)
 
 
 def collide(a,b):
@@ -92,23 +88,24 @@ def collide(a,b):
     return True
 
 def update(frame_time):
+    global Life
     bowman.update(frame_time)
-    for i in range(arrownum):
-        arrow[i].update(frame_time)
+    arrow.update(frame_time)
+    for i in range(3):
+        if collide(arrow,nomal_enemy[i]):
+            arrow.deletearrow()
+            nomal_enemy[i].deleteenemy()
+            Life -=1
+    if collide(arrow,background) :
+        arrow.deletearrow()
     for i in range(3):
         nomal_enemy[i].update(frame_time)
-
-
-    pass
-
-
 
 def draw(frame_time):
     clear_canvas()
     background.draw()
     bowman.draw()
-    for i in range(arrownum):
-        arrow[i] .draw()
+    arrow.draw()
     for i in range(3):
         nomal_enemy[i].draw()
     pass

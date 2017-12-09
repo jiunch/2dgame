@@ -5,7 +5,7 @@ from pico2d import *
 class Nomal_enemy:
 
     PIXEL_PER_METER = (10.0 / 0.5)           # 10 pixel 50 cm
-    RUN_SPEED_KMPH = 30.0                    # Km / Hour
+    RUN_SPEED_KMPH = 50.0                    # Km / Hour
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -41,10 +41,8 @@ class Nomal_enemy:
 
 
     def draw(self):
-        self.image.clip_draw(self.frame * 110, self.state * 100, 110, 100, self.x, self.y)
-
-    def boomdraw(self):
-        self.image.clip_draw(self.frame * 110+440, self.state * 100, 110, 100, self.x, self.y)
+        if self.state != self.DIE:
+            self.image.clip_draw(self.frame * 110, self.state * 100, 110, 100, self.x, self.y)
 
     def handle_event(self, event):
         pass
@@ -52,12 +50,8 @@ class Nomal_enemy:
     def get_bb(self):
         return self.x - 55, self.y - 50, self.x + 55, self.y + 50
 
-    def delt(self):
+    def deleteenemy(self):
         self.x, self.y = 1250, (100 * random.randint(2, 5))
-        self.frame = 0
-        self.life_time = 0.0
-        self.total_frames = 0.0
-
 
 
 
