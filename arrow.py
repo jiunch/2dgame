@@ -4,6 +4,7 @@ from bowman import Bowman
 
 bowman = None
 
+
 class Arrow:
 
     PIXEL_PER_METER = (10.0 / 0.5)  # 10 pixel 50 cm
@@ -26,6 +27,8 @@ class Arrow:
         self.dir = 0
         self.total_frames = 0.0
         self.image = load_image('arrow.png')
+        self.shotsound = load_music('shot.mp3')
+        self.shotsound.set_volume(32)
 
     def startdot(self, bowman):
         self.man = bowman
@@ -48,6 +51,7 @@ class Arrow:
             if (event.type, event.key) == (SDL_KEYDOWN, SDLK_SPACE):
                 self.state = 1
                 self.dir=1
+                self.shotsound.play(1)
 
     def get_bb(self):
         return self.x-35 , self.y-15 , self.x+35, self.y+15
@@ -56,5 +60,6 @@ class Arrow:
         self.state=self.STOP
         self.x=self.man.x
         self.dir=0
+
 
 

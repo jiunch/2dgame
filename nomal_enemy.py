@@ -15,16 +15,19 @@ class Nomal_enemy:
     FRAMES_PER_ACTION = 4
 
     image = None
-
+    hitsound =None
     LEFT_RUN, ATTACK , DIE = 0, 1, 2
 
     def __init__(self):
-        self.x, self.y = 1250, (100 * random.randint(2,5))
+        self.x, self.y = 1250, (100 * random.randint(1,5))
         self.frame = 0
         self.life_time = 0.0
         self.total_frames = 0.0
         self.dir = -1
         self.state = self.LEFT_RUN
+        if Nomal_enemy.hitsound == None:
+            Nomal_enemy.hitsound = load_music('hit.mp3')
+            Nomal_enemy.hitsound.set_volume(32)
         if Nomal_enemy.image == None:
             Nomal_enemy.image = load_image('Nomal_enemy.png')
 
@@ -51,9 +54,10 @@ class Nomal_enemy:
         return self.x - 55, self.y - 50, self.x + 55, self.y + 50
 
     def deleteenemy(self):
-        self.x, self.y = 1250, (100 * random.randint(2, 5))
+        self.x, self.y = 1250, (100 * random.randint(1, 5))
 
-
+    def hit(self):
+        self.hitsound.play(1)
 
 
 

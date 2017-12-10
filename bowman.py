@@ -23,6 +23,7 @@ class Bowman:
         self.dir=0
         self.state = self.STAND
         self.image = load_image('bowman.png')
+
         pass
 
     def update(self,frame_time):
@@ -57,3 +58,5 @@ class Bowman:
                 self.state = self.STAND
                 self.dir = 0
 
+    def get_bb(self):
+        return 0,0,350,700
