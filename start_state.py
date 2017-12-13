@@ -15,7 +15,7 @@ def enter():
     image = load_image('start_map.png')
     press = load_image('press.png')
     bgm = load_music('background.mp3')
-    bgm.set_volume(32)
+    bgm.set_volume(5)
     game_framework.reset_time()
     bgm.repeat_play()
 

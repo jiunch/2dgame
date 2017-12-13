@@ -12,7 +12,7 @@ def enter():
     global image,bgm
     image = load_image('defeat.png')
     bgm = load_music('defeat.mp3')
-    bgm.set_volume(32)
+    bgm.set_volume(8)
     bgm.play(1)
 
 def exit():

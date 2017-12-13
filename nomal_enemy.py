@@ -27,7 +27,7 @@ class Nomal_enemy:
         self.state = self.LEFT_RUN
         if Nomal_enemy.hitsound == None:
             Nomal_enemy.hitsound = load_music('hit.mp3')
-            Nomal_enemy.hitsound.set_volume(32)
+            Nomal_enemy.hitsound.set_volume(16)
         if Nomal_enemy.image == None:
             Nomal_enemy.image = load_image('Nomal_enemy.png')
 

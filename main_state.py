@@ -27,7 +27,7 @@ Winpoint=0
 Wintennum = Winpoint // 10
 Winonenum = Winpoint % 10
 
-Life = 10
+Life = 0
 Lifetennum = Life // 10
 Lifeonenum = Life % 10
 
@@ -58,8 +58,8 @@ def destroy_world():
 def enter():
     global Life,Winpoint,enemycount,enemynum,arrownum
     game_framework.reset_time()
-    Life=5
-    Winpoint=5
+    Life=10
+    Winpoint=20
     enemynum = 1
     enemycount = 0
     arrownum = 0

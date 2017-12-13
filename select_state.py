@@ -13,9 +13,8 @@ def enter():
     global image,bgm,count
     image = load_image('number.png')
     bgm = load_music('background.mp3')
-    bgm.set_volume(32)
+    bgm.set_volume(5)
     bgm.repeat_play()
-    start_state.bgmstart()
     count=0
 
 def exit():

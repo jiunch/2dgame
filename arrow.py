@@ -28,7 +28,7 @@ class Arrow:
         self.total_frames = 0.0
         self.image = load_image('arrow.png')
         self.shotsound = load_music('shot.mp3')
-        self.shotsound.set_volume(32)
+        self.shotsound.set_volume(8)
 
     def startdot(self, bowman):
         self.man = bowman

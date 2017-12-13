@@ -11,7 +11,7 @@ def enter():
     global image,bgm
     image = load_image('victory.png')
     bgm = load_music('victory.mp3')
-    bgm.set_volume(32)
+    bgm.set_volume(8)
     bgm.repeat_play()
 
 def exit():
