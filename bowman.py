@@ -1,4 +1,5 @@
 from pico2d import *
+import select_state
 
 class Bowman:
     PIXEL_PER_METER = (10.0 / 0.5)  # 10 pixel 30 cm
@@ -22,7 +23,7 @@ class Bowman:
         self.total_frames = 0.0
         self.dir=0
         self.state = self.STAND
-        self.image = load_image('bowman.png')
+        self.image = load_image('images/bowman.png')
 
         pass
 
@@ -32,7 +33,7 @@ class Bowman:
             return max(100, min(y, 300))
 
         self.life_time += frame_time
-        distance = Bowman.RUN_SPEED_PPS * frame_time
+        distance = Bowman.RUN_SPEED_PPS * frame_time + select_state.level()//2
         self.y += (self.dir * distance)
         self.total_frames += Bowman.FRAMES_PER_ACTION * Bowman.ACTION_PER_TIME * frame_time
         self.frame = int(self.total_frames) % 4
@@ -41,22 +42,22 @@ class Bowman:
         self.image.clip_draw(self.frame * 120,0, 120, 110, self.x, self.y)
 
     def handle_event(self, event):
-        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_w):
+        if (event.type, event.key) == (SDL_KEYDOWN, SDLK_UP):
             if self.state in (self.STAND, self.DOWN):
                 self.state = self.UP
                 self.dir = 1
-        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_s):
+        elif (event.type, event.key) == (SDL_KEYDOWN, SDLK_DOWN):
             if self.state in (self.STAND, self.UP):
                 self.state = self.DOWN
                 self.dir = -1
-        elif (event.type, event.key) == (SDL_KEYUP, SDLK_w):
+        elif (event.type, event.key) == (SDL_KEYUP, SDLK_UP):
             if self.state in (self.UP,):
                 self.state = self.STAND
                 self.dir = 0
-        elif (event.type, event.key) == (SDL_KEYUP, SDLK_s):
+        elif (event.type, event.key) == (SDL_KEYUP, SDLK_DOWN):
             if self.state in (self.DOWN,):
                 self.state = self.STAND
                 self.dir = 0
 
     def get_bb(self):
-        return 0,0,350,700
+        return 0,0,300,700

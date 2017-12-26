@@ -5,7 +5,7 @@ from pico2d import *
 class Background:
 
     def __init__(self):
-        self.image = load_image('background.png')
+        self.image = load_image('images/background.png')
         self.x =650.0
         self.y=350.0
 

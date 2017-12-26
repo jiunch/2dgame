@@ -1,11 +1,14 @@
 import random
+import select_state
 
 from pico2d import *
+
+
 
 class Nomal_enemy:
 
     PIXEL_PER_METER = (10.0 / 0.5)           # 10 pixel 50 cm
-    RUN_SPEED_KMPH = 50.0                    # Km / Hour
+    RUN_SPEED_KMPH = 50.0    # Km / Hour
     RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
     RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
     RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -26,17 +29,17 @@ class Nomal_enemy:
         self.dir = -1
         self.state = self.LEFT_RUN
         if Nomal_enemy.hitsound == None:
-            Nomal_enemy.hitsound = load_music('hit.mp3')
+            Nomal_enemy.hitsound = load_music('sound/hit.mp3')
             Nomal_enemy.hitsound.set_volume(16)
         if Nomal_enemy.image == None:
-            Nomal_enemy.image = load_image('Nomal_enemy.png')
+            Nomal_enemy.image = load_image('images/Nomal_enemy.png')
 
     def update(self, frame_time):
         def clamp(minimum, x, maximum):
             return max(minimum, min(x, maximum))
 
         self.life_time += frame_time
-        distance = Nomal_enemy.RUN_SPEED_PPS * frame_time
+        distance = Nomal_enemy.RUN_SPEED_PPS * frame_time + select_state.level()//2
         self.total_frames += Nomal_enemy.FRAMES_PER_ACTION * Nomal_enemy.ACTION_PER_TIME * frame_time
         self.frame = int(self.total_frames) % 4
         self.x += (self.dir * distance)

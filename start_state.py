@@ -12,9 +12,9 @@ bgm=None
 def enter():
     global image,press,bgm
     open_canvas(1300,700,sync=True)
-    image = load_image('start_map.png')
-    press = load_image('press.png')
-    bgm = load_music('background.mp3')
+    image = load_image('images/start_map.png')
+    press = load_image('images/press.png')
+    bgm = load_music('sound/background.mp3')
     bgm.set_volume(5)
     game_framework.reset_time()
     bgm.repeat_play()

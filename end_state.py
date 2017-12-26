@@ -10,8 +10,8 @@ image = None
 bgm = None
 def enter():
     global image,bgm
-    image = load_image('defeat.png')
-    bgm = load_music('defeat.mp3')
+    image = load_image('images/defeat.png')
+    bgm = load_music('sound/defeat.mp3')
     bgm.set_volume(8)
     bgm.play(1)
 
